@@ -19,6 +19,10 @@ const state = reactive({
 
 await fetchUser()
 
+const route = useRoute()
+const postId = route.params
+console.log(postId)
+
 const handleDelete = async (e) => {
   const userId = e.target.getAttribute('data-id')
   const { data } = await useFetch(`${usersAPI}${userId}`, {

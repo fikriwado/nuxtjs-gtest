@@ -2,6 +2,13 @@
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
+## Profile
+
+- Moch Fikri Khoirurrizal
+- mfikri.khoirurrizal@gmail.com
+- First time explore nuxtjs in this test
+- Start project at 12.30 - 12 Jan 2014
+
 ## Setup
 
 Make sure to install the dependencies:

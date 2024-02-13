@@ -6,38 +6,43 @@ const forms = reactive({
   email: '',
   gender: 'male',
   status: 'active',
-  newUser: {}
+  newUser: {},
+  statusCreated: ''
 })
 
 const handleSubmit = async (e) => {
   e.preventDefault()
-  const { data } = await useFetch('https://gorest.co.in/public/v2/users/', {
-    method: 'post',
-    headers: {
-      authorization:
-        'Bearer 431a13a2b2a839abb281c0e7e81688c64d61b6b3f77c45dde3d1484eef689155'
-    },
-    body: {
-      email: forms.email,
-      name: forms.name,
-      gender: forms.gender,
-      status: forms.status
-    },
-    onResponse({ request, response, options }) {
-      if (response.status == 201) {
-        forms.name = ''
-        forms.email = ''
-        forms.gender = 'male'
-        forms.status = 'active'
-        forms.newUser = response._data
+  const { data, success } = await useFetch(
+    'https://gorest.co.in/public/v2/users/',
+    {
+      method: 'post',
+      headers: {
+        authorization:
+          'Bearer 431a13a2b2a839abb281c0e7e81688c64d61b6b3f77c45dde3d1484eef689155'
+      },
+      body: {
+        email: forms.email,
+        name: forms.name,
+        gender: forms.gender,
+        status: forms.status
+      },
+      onResponse({ request, response, options }) {
+        if (response.status == 201) {
+          forms.name = ''
+          forms.email = ''
+          forms.gender = 'male'
+          forms.status = 'active'
+          forms.newUser = response._data
+          forms.statusCreated = 'success'
+        }
       }
     }
-  })
+  )
 }
 </script>
 <template>
   <NuxtLink
-    :to="{ name: 'users' }"
+    :to="{ name: 'users', params: { status: forms.statusCreated } }"
     class="flex items-center py-2 pr-3 gap-1 mb-3"
   >
     <IconArrowNarrowLeft class="w-6 h-6" /> Back
