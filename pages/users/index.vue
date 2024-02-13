@@ -4,9 +4,32 @@ definePageMeta({
   layout: 'users'
 })
 const tableHead = ['No', 'Name', 'Email', 'Gender', 'Status', 'Action']
-const { data: users } = await useFetch('https://gorest.co.in/public/v2/users/')
+const usersAPI = 'https://gorest.co.in/public/v2/users/'
 const classesDataHead =
   'border-b border-slate-100 dark:border-slate-700 text-slate-300 p-2'
+
+const fetchUser = async () => {
+  const { data: users } = await useFetch(usersAPI)
+  state.users = users
+}
+
+const state = reactive({
+  users: {}
+})
+
+await fetchUser()
+
+const handleDelete = async (e) => {
+  const userId = e.target.getAttribute('data-id')
+  const { data } = await useFetch(`${usersAPI}${userId}`, {
+    method: 'delete',
+    headers: {
+      authorization:
+        'Bearer 431a13a2b2a839abb281c0e7e81688c64d61b6b3f77c45dde3d1484eef689155'
+    }
+  })
+  await fetchUser()
+}
 </script>
 <template>
   <div class="space-y-3">
@@ -35,7 +58,7 @@ const classesDataHead =
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(user, i) in users" :key="user.id">
+        <tr v-for="(user, i) in state.users" :key="user.id">
           <td :class="classesDataHead" class="text-center">{{ i + 1 }}</td>
           <td :class="classesDataHead">{{ user.name }}</td>
           <td :class="classesDataHead">{{ user.email }}</td>
@@ -50,10 +73,13 @@ const classesDataHead =
               class="transition duration-300 cursor-pointer inline-block py-0.5 px-2 bg-slate-700 border border-slate-200/10 hover:bg-slate-800 rounded"
               >Edit</NuxtLink
             >
-            <NuxtLink
+            <button
+              @click="handleDelete"
+              :data-id="user.id"
               class="transition duration-300 cursor-pointer inline-block py-0.5 px-2 bg-slate-700 border border-slate-200/10 hover:bg-slate-800 rounded"
-              >Delete</NuxtLink
             >
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
