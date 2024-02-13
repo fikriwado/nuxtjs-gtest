@@ -28,8 +28,8 @@ const totalPages = computed(() => Math.ceil(posts.length / perPage))
         v-for="page in totalPages"
         :key="page"
         @click="currentPage = page"
-        class="px-4 py-2 mx-1 rounded-lg backdrop-blur-lg bg-slate-700/20 border border-white/10"
         :class="{ 'bg-slate-700': currentPage === page }"
+        class="px-4 py-2 mx-1 rounded-lg backdrop-blur-lg border border-white/10"
       >
         {{ page }}
       </button>
