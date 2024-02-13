@@ -5,7 +5,7 @@
   >
     <div class="relative flex items-center gap-2">
       <NuxtLink class="transition duration-300 rounded px-2 py-1 hover:bg-slate-100/10" :to="{ name: 'index' }">Home</NuxtLink>
-      <NuxtLink class="transition duration-300 rounded px-2 py-1 hover:bg-slate-100/10" :to="{ name: 'about' }">About</NuxtLink>
+      <NuxtLink class="transition duration-300 rounded px-2 py-1 hover:bg-slate-100/10" :to="{ name: 'users' }">Users</NuxtLink>
     </div>
   </nav>
 </template>

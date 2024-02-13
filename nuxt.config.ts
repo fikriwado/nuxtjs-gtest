@@ -6,5 +6,11 @@ export default defineNuxtConfig({
       title: 'Synapsis - Technical Test'
     }
   },
-  modules: ['@nuxtjs/tailwindcss']
+  modules: ['@nuxtjs/tailwindcss'],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {}
+    }
+  }
 })
